@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Page 2</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        body {
+            background-image: url('fuzzy-background.png');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+        }
+        
+        .floating-image {
+            position: relative;
+            width: 700px;
+            height: auto;
+            animation: float 6s ease-in-out infinite;
+            z-index: 40;
+            cursor: pointer; /* looks clickable */
+        }
+        
+        @keyframes float {
+            0%, 100% {
+                transform: translateY(0px) translateX(0px);
+            }
+            25% {
+                transform: translateY(-20px) translateX(10px);
+            }
+            50% {
+                transform: translateY(-10px) translateX(-15px);
+            }
+            75% {
+                transform: translateY(-30px) translateX(5px);
+            }
+        }
+        
+        h1 {
+            margin-top: -300px;
+            color: rgb(150, 115, 115);
+            font-family: 'Arial', sans-serif;
+            font-size: 24px;
+            text-align: center;
+        }
+         h2 {
+             margin-top: 300px;
+             color: rgb(150, 115, 115);
+             font-family: 'Arial', sans-serif;
+             font-size: 50px;
+             text-align: center;
+             opacity: 0;
+             transition: opacity 0.5s ease;
+         }
+         
+         h2.scroll-visible {
+             opacity: 1;
+         }
+         
+         .play-button {
+             position: absolute;
+             bottom: -50px;
+             right: 20px;
+             width: 60px;
+             height: auto;
+             z-index: 10;
+         }
+
+
+
+        /* New wrapper for image + playlist */
+        .content-wrapper {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            justify-content: center;
+            margin-top: 50px;
+        }
+
+        /* Playlist hidden by default */
+        #playlist {
+            max-width: 0;
+            opacity: 0;
+            overflow: hidden;
+            transform: translateX(30px);  /* start slightly offscreen */
+            transition: all 0.6s ease;
+        }
+
+        /* Playlist slides in when .show is toggled */
+        #playlist.show {
+            max-width: 420px;  /* matches iframe width */
+            opacity: 1;
+            transform: translateX(0);
+        }
+    </style>
+</head>
+<body>
+    <!-- Image + playlist side by side -->
+    <div class="content-wrapper">
+        <!-- Clickable floating image -->
+        <img src="floating.png" 
+             alt="Floating image" 
+             class="floating-image"
+             onclick="document.getElementById('playlist').classList.toggle('show')">
+
+        <!-- Playlist embed -->
+        <div id="playlist">
+            <iframe style="border-radius:12px" 
+                    src="https://embed.music.apple.com/us/playlist/pl.u-WabZZmVIyP3YgP" 
+                    width="400" height="380" frameborder="0" 
+                    allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" 
+                    loading="lazy">
+            </iframe>
+        </div>
+    </div>
+
+    <div class="container">
+        <h1>i'm a floating memory... press me to feel the past</h1>
+        <h2>every record holds a moment in your life</h2>
+    </div>
+    
+    <img src="play-button.png" alt="Play button" class="play-button">
+    
+    <script>
+        window.addEventListener('scroll', function() {
+            const h2 = document.querySelector('h2');
+            const scrollPosition = window.scrollY;
+            
+            // Show text when scrolled down 200px
+            if (scrollPosition > 200) {
+                h2.classList.add('scroll-visible');
+            } else {
+                h2.classList.remove('scroll-visible');
+            }
+        });
+    </script>
+</body>
+</html>
