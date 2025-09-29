@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>forget</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <img src="bug-face.png" alt="Bug face" class="bug-face">
+        <a href="page2.html">
+            <button id="unlockButton">unlock vault</button>
+        </a>
+    </div>
+    
+    <audio id="heartbeatSound" preload="auto" loop>
+        <source src="heartbeat-sound.mp3" type="audio/mpeg">
+    </audio>
+    
+    <script>
+        const button = document.getElementById('unlockButton');
+        const audio = document.getElementById('heartbeatSound');
+        
+        button.addEventListener('mouseenter', function() {
+            audio.currentTime = 0; // Reset to beginning
+            audio.play().catch(e => console.log('Audio play failed:', e));
+        });
+        
+        button.addEventListener('mouseleave', function() {
+            audio.pause();
+            audio.currentTime = 0; // Reset to beginning
+        });
+    </script>
+</body>
+</html>
