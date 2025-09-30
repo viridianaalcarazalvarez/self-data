@@ -60,12 +60,34 @@
          }
          
          .play-button {
-             position: absolute;
-             bottom: -50px;
-             right: 20px;
-             width: 60px;
+             display: block;
+             margin: 10px auto;
+             width: 350px;
              height: auto;
-             z-index: 10;
+             opacity: 0;
+             transform: translateY(50px);
+             transition: opacity 0.5s ease, transform 0.5s ease;
+         }
+         
+         .play-button.scroll-visible {
+             opacity: 1;
+             transform: translateY(0);
+         }
+         
+         .play-text {
+            color: rgb(150, 115, 115);
+             font-family: 'Arial', sans-serif;
+             font-size: 24px;
+             text-align: center;
+             margin-bottom: 20px;
+             opacity: 0;
+             transform: translateY(50px);
+             transition: opacity 0.5s ease, transform 0.5s ease;
+         }
+         
+         .play-text.scroll-visible {
+             opacity: 1;
+             transform: translateY(0);
          }
 
 
@@ -121,18 +143,33 @@
         <h2>every record holds a moment in your life</h2>
     </div>
     
-    <img src="play-button.png" alt="Play button" class="play-button">
+    <div class="play-text">keep playing</div>
+
+    <a href="page3.html">
+        <img src="play-button.png" alt="Play button" class="play-button">
+    </a>
     
     <script>
         window.addEventListener('scroll', function() {
             const h2 = document.querySelector('h2');
+            const playText = document.querySelector('.play-text');
+            const playButton = document.querySelector('.play-button');
             const scrollPosition = window.scrollY;
             
-            // Show text when scrolled down 200px
+            // Show h2 text when scrolled down 200px
             if (scrollPosition > 200) {
                 h2.classList.add('scroll-visible');
             } else {
                 h2.classList.remove('scroll-visible');
+            }
+            
+            // Show play button and text when scrolled down 800px
+            if (scrollPosition > 800) {
+                playText.classList.add('scroll-visible');
+                playButton.classList.add('scroll-visible');
+            } else {
+                playText.classList.remove('scroll-visible');
+                playButton.classList.remove('scroll-visible');
             }
         });
     </script>
