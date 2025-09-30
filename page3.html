@@ -163,7 +163,29 @@
     
     <img src="running.png" alt="Running" class="running-image">
     <img src="music-note.png" alt="Music Note" class="music-note">
+    
     <img src="crazy-musical-notes.gif" alt="Crazy Musical Notes" class="crazy-musical-notes">
+      <!-- Hidden Apple Music player for crazy musical notes -->
+  <div id="crazy-musical-player" style="display:none; position:fixed; bottom:50%; left:90%; transform:translateX(-50%); z-index:100;">
+    <iframe allow="autoplay *; encrypted-media *; fullscreen *;" 
+            frameborder="0" 
+            height="100" 
+            width="300"
+            style="overflow:hidden;background:transparent;border-radius:12px;" 
+            sandbox="allow-forms allow-popups allow-same-origin allow-scripts allow-storage-access-by-user-activation allow-top-navigation-by-user-activation allow-presentation" 
+            src="https://embed.music.apple.com/us/playlist/fall-almost-2025/pl.u-NpXmmK7FN9M759">
+    </iframe>
+  </div>
+  <script>
+    const crazyMusicalNotes = document.querySelector('.crazy-musical-notes');
+    const crazyMusicalPlayer = document.getElementById('crazy-musical-player');
+  
+    crazyMusicalNotes.addEventListener('click', () => {
+      crazyMusicalPlayer.style.display = 'block'; // show Apple Music player
+    });
+  </script>
+<!-- Hidden Apple Music player for crazy musical notes -->
+    
    
     <img src="grey-shiny-notes.gif" alt="Grey Shiny Notes" class="grey-shiny-notes">
      <!-- Hidden Apple Music player for grey shiny notes -->
