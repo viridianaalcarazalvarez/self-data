@@ -3,8 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Page 3</title>
+    <title>♪♪♪...</title>
     <link rel="stylesheet" href="style.css">
+    <style>
+        body {
+            cursor: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="black"><text y="18" font-size="20">♪</text></svg>'), auto;
+        }
+    </style>
     <style>
         body {
             margin: 0;
@@ -101,6 +106,25 @@
  
  .grey-shiny-notes.visible {
      opacity: 1;
+     cursor: pointer;
+ }
+ 
+ .grey-text {
+     position: fixed;
+     top: 23%;
+     left: 10%;
+     color: white;
+     font-family: 'Arial', sans-serif;
+     font-size: 18px;
+     text-align: center;
+     z-index: 35;
+     opacity: 0;
+     transition: opacity 0.5s ease;
+     text-shadow: 2px 2px 4px rgba(255, 255, 255, 0);
+ }
+ 
+ .grey-text.visible {
+     opacity: 1;
  }
  
  .hipster-notes {
@@ -146,6 +170,25 @@
  
  .uhh-notes.visible {
      opacity: 1;
+     cursor: pointer;
+ }
+ 
+ .uhh-text {
+     position: fixed;
+     bottom: 30%;
+     right: 20%;
+     color: white;
+     font-family: 'Arial', sans-serif;
+     font-size: 20px;
+     text-align: center;
+     z-index: 35;
+     opacity: 0;
+     transition: opacity 0.5s ease;
+     text-shadow: 2px 2px 4px rgba(255, 255, 255, 0);
+ }
+ 
+ .uhh-text.visible {
+     opacity: 1;
  }
 
     </style>
@@ -162,7 +205,9 @@
     </div>
     
     <img src="running.png" alt="Running" class="running-image">
-    <img src="music-note.png" alt="Music Note" class="music-note">
+    <a href="page4.html">
+        <img src="music-note.png" alt="Music Note" class="music-note">
+    </a>
     
     <img src="crazy-musical-notes.gif" alt="Crazy Musical Notes" class="crazy-musical-notes">
       <!-- Hidden Apple Music player for crazy musical notes -->
@@ -188,6 +233,7 @@
     
    
     <img src="grey-shiny-notes.gif" alt="Grey Shiny Notes" class="grey-shiny-notes">
+    <div class="grey-text">all playlists have different vibes...</div>
      <!-- Hidden Apple Music player for grey shiny notes -->
   <div id="grey-shiny-player" style="display:none; position:fixed; bottom:80%; left:30%; transform:translateX(-50%); z-index:100;">
     <iframe allow="autoplay *; encrypted-media *; fullscreen *;" 
@@ -256,6 +302,7 @@
  <!-- Hidden Apple Music player -->
 
     <img src="uhh-notes.gif" alt="Uhh Notes" class="uhh-notes">
+    <div class="uhh-text">so much music, so little time</div>
     
     <script>
         // Show running image after 9 seconds
@@ -270,17 +317,69 @@
             const musicNote = document.querySelector('.music-note');
             const crazyMusicalNotes = document.querySelector('.crazy-musical-notes');
             const greyShinyNotes = document.querySelector('.grey-shiny-notes');
+            const greyText = document.querySelector('.grey-text');
             const hipsterNotes = document.querySelector('.hipster-notes');
             const jumpyNotes = document.querySelector('.jumpy-notes');
             const uhhNotes = document.querySelector('.uhh-notes');
+            const uhhText = document.querySelector('.uhh-text');
+            
+            // Track which elements have been clicked
+            const clickedElements = new Set();
+            const totalElements = 6; // running, crazy, grey, hipster, jumpy, uhh
+            
+            function checkAllClicked() {
+                if (clickedElements.size === totalElements) {
+                    musicNote.classList.add('visible');
+                }
+            }
             
             runningImage.addEventListener('click', function() {
-                musicNote.classList.add('visible');
-                crazyMusicalNotes.classList.add('visible');
-                greyShinyNotes.classList.add('visible');
-                hipsterNotes.classList.add('visible');
-                jumpyNotes.classList.add('visible');
-                uhhNotes.classList.add('visible');
+                if (!clickedElements.has('running')) {
+                    clickedElements.add('running');
+                    crazyMusicalNotes.classList.add('visible');
+                    greyShinyNotes.classList.add('visible');
+                    hipsterNotes.classList.add('visible');
+                    jumpyNotes.classList.add('visible');
+                    uhhNotes.classList.add('visible');
+                    checkAllClicked();
+                }
+            });
+            
+            crazyMusicalNotes.addEventListener('click', function() {
+                if (!clickedElements.has('crazy')) {
+                    clickedElements.add('crazy');
+                    checkAllClicked();
+                }
+            });
+            
+            greyShinyNotes.addEventListener('click', function() {
+                if (!clickedElements.has('grey')) {
+                    clickedElements.add('grey');
+                    greyText.classList.add('visible');
+                    checkAllClicked();
+                }
+            });
+            
+            hipsterNotes.addEventListener('click', function() {
+                if (!clickedElements.has('hipster')) {
+                    clickedElements.add('hipster');
+                    checkAllClicked();
+                }
+            });
+            
+            jumpyNotes.addEventListener('click', function() {
+                if (!clickedElements.has('jumpy')) {
+                    clickedElements.add('jumpy');
+                    checkAllClicked();
+                }
+            });
+            
+            uhhNotes.addEventListener('click', function() {
+                if (!clickedElements.has('uhh')) {
+                    clickedElements.add('uhh');
+                    uhhText.classList.add('visible');
+                    checkAllClicked();
+                }
             });
         });
     </script>
